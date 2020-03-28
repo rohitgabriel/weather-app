@@ -32,8 +32,7 @@ pipeline {
                 script {
                     instanceIP = sh(script: './getazure-instance-id.sh', returnStdout: true).trim()
                 }
-                echo "${instanceIP}"
-                }
+                
                 sshagent(credentials : ['azurekey']) {
                     sh "ssh -o StrictHostKeyChecking=no ubuntu@${instanceIP} uptime"
                     sh "scp ./deploycode.sh ubuntu@${instanceIP}:/tmp/deploycode.sh"
