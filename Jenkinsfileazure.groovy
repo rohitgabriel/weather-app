@@ -43,7 +43,7 @@ pipeline {
         stage("Build and Deploy WeatherApp") {
             steps {
                 sshagent(credentials : ['azurekey']) {
-                    sh "ssh azureuser@${instanceIP} /tmp/deploycode.sh"
+                    sh "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no azureuser@${instanceIP} /tmp/deploycode.sh"
                 }
             }
         }
