@@ -29,7 +29,6 @@ pipeline {
         // }
         stage("Get Instance IP and setup script") {
             steps {
-                {
                 script {
                     instanceIP = sh(script: './getazure-instance-id.sh', returnStdout: true).trim()
                 }
@@ -40,7 +39,7 @@ pipeline {
                     sh "scp ./deploycode.sh ubuntu@${instanceIP}:/tmp/deploycode.sh"
                     sh "ssh ubuntu@${instanceIP} chmod 755 /tmp/deploycode.sh"
                 }
-            }
+            
         }
         stage("Deploy WeatherApp") {
             steps {
