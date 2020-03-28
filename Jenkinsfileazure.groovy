@@ -38,7 +38,7 @@ pipeline {
                     sh "scp ./deploycode.sh ubuntu@${instanceIP}:/tmp/deploycode.sh"
                     sh "ssh ubuntu@${instanceIP} chmod 755 /tmp/deploycode.sh"
                 }
-            
+            }
         }
         stage("Deploy WeatherApp") {
             steps {
