@@ -39,7 +39,7 @@ pipeline {
                 }
             }
         }
-        stage("Deploy WeatherApp") {
+        stage("Build and Deploy WeatherApp") {
             steps {
                 sshagent(credentials : ['awskey']) {
                     sh "ssh ubuntu@${instanceIP} /tmp/deploycode.sh"

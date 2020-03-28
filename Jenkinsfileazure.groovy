@@ -34,13 +34,13 @@ pipeline {
                 }
                 
                 sshagent(credentials : ['azurekey']) {
-                    sh "ssh -o StrictHostKeyChecking=no azureuser@${instanceIP} uptime"
-                    sh "scp ./deploycode.sh azureuser@${instanceIP}:/tmp/deploycode.sh"
-                    sh "ssh azureuser@${instanceIP} chmod 755 /tmp/deploycode.sh"
+                    sh "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no azureuser@${instanceIP} uptime"
+                    sh "scp -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no ./deploycode.sh azureuser@${instanceIP}:/tmp/deploycode.sh"
+                    sh "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no azureuser@${instanceIP} chmod 755 /tmp/deploycode.sh"
                 }
             }
         }
-        stage("Deploy WeatherApp") {
+        stage("Build and Deploy WeatherApp") {
             steps {
                 sshagent(credentials : ['azurekey']) {
                     sh "ssh azureuser@${instanceIP} /tmp/deploycode.sh"
