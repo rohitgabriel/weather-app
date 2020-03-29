@@ -60,7 +60,7 @@ export class Home extends React.Component {
     return (
       <div>
         <div className='header'>
-          <h2>Weather Forecaster</h2>
+          <h2>Weather Forecast</h2>
           <img src={LightningBolt}/>
         </div>
         <div className="instructions">
